@@ -1,2 +1,6 @@
 /19CSE212.pdf
 .DS_Store
+
+# Rust
+debug/
+target/
