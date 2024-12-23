@@ -11,7 +11,7 @@
 
 ---
 
-A collection of data structures and algorithms implemented in `Python`. Inspired by the `Design and Analysis of Algorithms` course from the 3rd year of `B. Tech, CSE` at `Amrita Vishwa Vidyapeetham, Coimbatore`, taught by `Dr. Vidya Balasubramanian` ma'am.   
+A collection of data structures and algorithms implemented in `Python`. Inspired by the `Design and Analysis of Algorithms` course from the 3rd year of `B. Tech, CSE` at `Amrita Vishwa Vidyapeetham, Coimbatore`, taught by `Dr. Vidya Balasubramanian` ma'am.
 
 ---
 
@@ -38,7 +38,7 @@ A collection of data structures and algorithms implemented in `Python`. Inspired
 Getting started is easy! Just follow these steps to bring the repository to your local machine:
 
 ```bash
-git clone https://github.com/Ashrockzzz2003/Data_Structures_and_Algorithms.git  
+git clone https://github.com/Ashrockzzz2003/Data_Structures_and_Algorithms.git
 cd Data_Structures_and_Algorithms
 ```
 
@@ -82,6 +82,14 @@ Run Go programs using the `go run` command:
 go run sorting/quick_sort.go
 ```
 
+### `Run Rust Code`
+
+To run Rust code, first go to the cargo project directory and then run:
+
+```bash
+cargo run
+```
+
 ---
 
 ## **Contributing**
@@ -92,10 +100,10 @@ We’re excited to have you contribute! Whether it’s adding a new algorithm, f
 
 ## **Contributors**
 
-| **Contribution**              | **Contributor**                              |
-| ----------------------------- | -------------------------------------------- |
-| Python (.py)                  | [Ashwin Narayanan S](https://github.com/Ashrockzzz2003) |
-| C++ (.cpp)                    | [Aasil](https://github.com/mdxaasil)         |
+| **Contribution** | **Contributor**                                         |
+| ---------------- | ------------------------------------------------------- |
+| Python (.py)     | [Ashwin Narayanan S](https://github.com/Ashrockzzz2003) |
+| C++ (.cpp)       | [Aasil](https://github.com/mdxaasil)                    |
 
 Want to see your name here? Contribute this Winter for AmWOC (Amrita Winter of Code) and make it! 🚀
 
