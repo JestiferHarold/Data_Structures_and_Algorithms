@@ -1,13 +1,12 @@
-// parallel merge sort
-
 use crate::merge_sort::merge_sort;
 use std::sync::{Arc, Mutex};
 use std::thread;
 
-// adjust the threshold value according to the size of the array
-// if the size of the array is less than the threshold value, then normal merge sort will be used
+// adjust the threshold value according to the size of the array.
+// if the size of the array is less than the threshold value, then normal merge sort will be used.
 const THRESHOLD: usize = 4096;
 
+// merge sort helper function
 pub fn merge(arr: &mut [i32], left: &[i32], right: &[i32]) {
     let mut i = 0;
     let mut j = 0;
@@ -36,6 +35,7 @@ pub fn merge(arr: &mut [i32], left: &[i32], right: &[i32]) {
     }
 }
 
+// parallel merge sort function
 pub fn parallel_merge_sort(arr: Arc<Mutex<Vec<i32>>>){
     let mut arr = arr.lock().unwrap();
 
@@ -43,11 +43,13 @@ pub fn parallel_merge_sort(arr: Arc<Mutex<Vec<i32>>>){
         return;
     }
 
+    // if the size of the array is less than the threshold value, we use normal merge sort will be used.
     if arr.len() <= THRESHOLD {
         merge_sort(&mut arr);
         return;
     }
 
+    // split the array into two halves.
     let mid = arr.len()/2;
     let left_arr = arr[..mid].to_vec();
     let right_arr = arr[mid..].to_vec();
@@ -55,6 +57,7 @@ pub fn parallel_merge_sort(arr: Arc<Mutex<Vec<i32>>>){
     let left_arc = Arc::new(Mutex::new(left_arr));
     let right_arc = Arc::new(Mutex::new(right_arr));
 
+    // makes a threads to sort the left half.
     let left_handle = thread::spawn({
         let left_arc = Arc::clone(&left_arc);
         move || {
@@ -62,6 +65,7 @@ pub fn parallel_merge_sort(arr: Arc<Mutex<Vec<i32>>>){
         }
     });
 
+    // makes a threads to sort the right half.
     let right_handle = thread::spawn({
         let right_arc = Arc::clone(&right_arc);
         move || {
@@ -69,9 +73,11 @@ pub fn parallel_merge_sort(arr: Arc<Mutex<Vec<i32>>>){
         }
     });
 
+    // waiting for threads to finish.
     left_handle.join().unwrap();
     right_handle.join().unwrap();
 
+    // merge the two halves.
     merge(&mut arr, &left_arc.lock().unwrap(), &right_arc.lock().unwrap());
 
 }
