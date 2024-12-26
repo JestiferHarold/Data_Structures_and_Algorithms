@@ -10,16 +10,14 @@ use std::sync::{Arc, Mutex};
 
 fn main() {
     // change the size of the array (also change the threshold value according to size for better results).
-    let size: usize = 100;
+    let size: usize = 10000;
 
     // this generates the array of required size with random numbers.
     let mut arr: Vec<i32> = (0..size)
         .map(|_| rand::thread_rng().gen_range(1..size as i32))
         .collect();
 
-    // print the array before sorting.
     // Uncomment the below lines to print the array before sorting (only do this for small size arrays).
-
     // print!("Array before sorting: ");
     // println!("{:?}", arr);
 
@@ -28,9 +26,7 @@ fn main() {
     merge_sort(&mut arr);
     let normalmergesorttime = start_time.elapsed();
 
-    // print the array after sorting.
     // Uncomment the below lines to print the array after sorting (only do this for small size arrays).
-
     // print!("Array after sorting with normal merge sort: ");
     // println!("{:?}", arr);
 
@@ -40,9 +36,7 @@ fn main() {
     parallel_merge_sort(Arc::clone(&arr_arc));
     let parallelmergesorttime = start_time.elapsed(); 
 
-    // print the array after sorting.
     // Uncomment the below lines to print the array after sorting (only do this for small size arrays).
-    
     // print!("Array after sorting with parallel merge sort: ");
     // println!("{:?}", arr_arc.lock().unwrap());
 
