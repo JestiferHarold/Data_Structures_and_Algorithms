@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 // ArraySize is the size of the hash table array
 const ArraySize = 7
 
@@ -32,7 +34,7 @@ func (h *hashTable) searchKey(key string) bool {
 }
 
 // deleteKey removes a key from the hash table
-func (h *hashTable) deletekey(key string) bool {
+func (h *hashTable) deleteKey(key string) bool {
 	index := hash(key)
 	return h.array[index].delete(key)
 }
@@ -101,12 +103,86 @@ func Init() *hashTable {
 }
 
 func main() {
-	HashTable := Init()
-	list := []string{
-		"ERIC", "KENNY", "KYLE", "STAN", "RANDY", "BUTTERS", "TOKEN",
+	// Initialize the hash table
+	hashTable := Init()
+
+	fmt.Println("=== Testing Normal Operations ===")
+
+	// Test case 1: Insert keys
+	keys := []string{"Midhunan", "Varun", "Joshua", "Aadesh", "Arjun", "Nishanth", "Akshar"}
+	for _, key := range keys {
+		success := hashTable.insertKey(key)
+		if success {
+			fmt.Printf("Inserted: %s\n", key)
+		} else {
+			fmt.Printf("Failed to insert (duplicate): %s\n", key)
+		}
 	}
 
-	for _, key := range list {
-		HashTable.insertKey(key)
+	// Test case 2: Search for a key
+	testKey := "Varun"
+	if hashTable.searchKey(testKey) {
+		fmt.Printf("Search success: %s found in the hash table.\n", testKey)
+	} else {
+		fmt.Printf("Search failure: %s not found in the hash table.\n", testKey)
+	}
+
+	// Test case 3: Delete a key
+	if hashTable.deleteKey(testKey) {
+		fmt.Printf("Delete success: %s removed from the hash table.\n", testKey)
+	} else {
+		fmt.Printf("Delete failure: %s not found in the hash table.\n", testKey)
+	}
+
+	// Verify deletion
+	if hashTable.searchKey(testKey) {
+		fmt.Printf("Post-deletion search failure: %s still exists in the hash table.\n", testKey)
+	} else {
+		fmt.Printf("Post-deletion search success: %s is not in the hash table.\n", testKey)
+	}
+
+	fmt.Println("\n=== Testing Edge Cases ===")
+
+	// Edge case 1: Insert duplicate keys
+	duplicateKey := "Midhunan"
+	success := hashTable.insertKey(duplicateKey)
+	if !success {
+		fmt.Printf("Duplicate insert prevented: %s\n", duplicateKey)
+	}
+
+	// Edge case 2: Delete a non-existent key
+	nonExistentKey := "NONEXISTENT"
+	if !hashTable.deleteKey(nonExistentKey) {
+		fmt.Printf("Delete failure: %s does not exist in the hash table.\n", nonExistentKey)
+	}
+
+	// Edge case 3: Search for a non-existent key
+	if !hashTable.searchKey(nonExistentKey) {
+		fmt.Printf("Search success: %s is not in the hash table.\n", nonExistentKey)
+	}
+
+	// Edge case 4: Insert an empty string
+	emptyKey := ""
+	if hashTable.insertKey(emptyKey) {
+		fmt.Printf("Insert success: Empty key inserted.\n")
+	} else {
+		fmt.Printf("Insert failure: Empty key was not inserted.\n")
+	}
+
+	// Edge case 5: Insert keys with same hash value
+	// With ArraySize = 7, "A" and "H" hash to the same index
+	collidingKeys := []string{"A", "H"}
+	for _, key := range collidingKeys {
+		hashTable.insertKey(key)
+	}
+	fmt.Println("Colliding keys 'A' and 'H' inserted successfully.")
+
+	// Verify collision handling
+	for _, key := range collidingKeys {
+		if hashTable.searchKey(key) {
+			fmt.Printf("Search success: %s found in the hash table.\n", key)
+		} else {
+			fmt.Printf("Search failure: %s not found in the hash table.\n", key)
+		}
 	}
 }
