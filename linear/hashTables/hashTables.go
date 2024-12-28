@@ -151,7 +151,7 @@ func main() {
 	}
 
 	// Edge case 2: Delete a non-existent key
-	nonExistentKey := "NONEXISTENT"
+	nonExistentKey := "Anush"
 	if !hashTable.deleteKey(nonExistentKey) {
 		fmt.Printf("Delete failure: %s does not exist in the hash table.\n", nonExistentKey)
 	}
