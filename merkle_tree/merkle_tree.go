@@ -93,15 +93,15 @@ func makeMerkleProof(hash []byte, merkleTree [][]byte) (bool,[][]byte) {
     return true, proof
 }
 
-// func main() {
-//     var datas = []string{"a","b","c","d","e"}
-//     var mt = createMerkleTree(datas)
-//     for i,hash := range mt {
-//         fmt.Printf("%d: %x\n",i,hash)
-//     }
+func main() {
+    var datas = []string{"a","b","c","d","e"}
+    var mt = createMerkleTree(datas)
+    for i,hash := range mt {
+        fmt.Printf("%d: %x\n",i,hash)
+    }
     
-//     _, pf := makeMerkleProof(hash([]byte("a")), mt)
-//     for _,hash := range pf {
-//         fmt.Printf("%x\n",hash)
-//     }
-// }
+    _, pf := makeMerkleProof(hash([]byte("a")), mt)
+    for _,hash := range pf {
+        fmt.Printf("%x\n",hash)
+    }
+}
