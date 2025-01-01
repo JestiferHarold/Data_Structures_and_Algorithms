@@ -1,5 +1,5 @@
 // Kosaraju's algorithm is used to find strongly connected components. It is applicable only for directed graphs
-"""In a component if every pair of vertex is reachable to each other it is called strongly connected components.
+/*In a component if every pair of vertex is reachable to each other it is called strongly connected components.
    Kosaraju's Algorithm:
    1.Sort all edges of the graph according to its stopping time.Implement DFS from node 0 and and 
      while backtracking in the DFS, store the nodes in a stack
@@ -7,9 +7,8 @@
      list and store the information the graph in reversed manner
    3.Now, implement DFS again from the node which is on the top of the stack and continue until stack becomes empty.
      Count the number of DFS calls which gives the number of strongly connected components.
-   4.To get SCCs , store nodes in array during each DFS call."""
-     
-
+   4.To get SCCs , store nodes in array during each DFS call.
+*/
 package main
 
 import "fmt"
