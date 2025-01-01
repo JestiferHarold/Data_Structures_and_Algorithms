@@ -109,7 +109,7 @@ func main() {
 		var u, v int
 		fmt.Printf("Edge %d: ", i+1)
 		fmt.Scan(&u, &v)
-		if u<0 || u>=V || v<0 ||v<=V{
+		if u<0 || u>=V || v<0 ||v>=V{
 		fmt.Println("Invalid Edge")
 		i--
 		continue
