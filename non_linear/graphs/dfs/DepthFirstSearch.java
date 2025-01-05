@@ -59,10 +59,10 @@ class Graph {
      * @param dfsTraversalOrder The list to store the order of DFS traversal.
      */
     private void performDFS(int currentNode, boolean[] visited, ArrayList<Integer> dfsTraversalOrder) {
-        visited[currentNode] = true; // Mark the current node as visited
-        dfsTraversalOrder.add(currentNode); // Add the current node to the traversal order
+        visited[currentNode] = true; // Mark the current node as visited.
+        dfsTraversalOrder.add(currentNode); // Add the current node to the traversal order.
 
-        // Recursively visit all unvisited neighbors of the current node
+        // Recursively visit all unvisited neighbors of the current node.
         for (Integer neighbor : adjacencyList.get(currentNode)) {
             if (!visited[neighbor]) {
                 performDFS(neighbor, visited, dfsTraversalOrder);
@@ -76,10 +76,10 @@ class Graph {
      * @return A list of nodes in the order they are visited during DFS.
      */
     public ArrayList<Integer> dfsTraversal() {
-        boolean[] visited = new boolean[numberOfVertices]; // To track visited nodes
-        ArrayList<Integer> dfsTraversalOrder = new ArrayList<>(); // To store the traversal order
+        boolean[] visited = new boolean[numberOfVertices]; // To track visited nodes.
+        ArrayList<Integer> dfsTraversalOrder = new ArrayList<>(); // To store the traversal order.
 
-        // Start DFS from node 0
+        // Start DFS from node 0.
         performDFS(0, visited, dfsTraversalOrder);
         return dfsTraversalOrder;
     }

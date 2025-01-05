@@ -8,7 +8,7 @@ public class BreadthFirstSearch {
         // Create a Graph object with 6 vertices (0 to 5).
         Graph graph = new Graph(6);
 
-        // Add edges to the graph
+        // Add edges to the graph.
         graph.addEdge(0, 1);
         graph.addEdge(0, 2);
         graph.addEdge(1, 3);
