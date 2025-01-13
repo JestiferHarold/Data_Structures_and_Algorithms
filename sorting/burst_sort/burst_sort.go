@@ -19,6 +19,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 var Burst_Threshold = 3 // Default bucket holds a max of 3 words before it bursts.
@@ -131,6 +132,7 @@ func (current_node *TrieNode) Burst() {
 
 // Function that handles the Insertion Phase.
 func (trie *BurstTrie) Insert(word string) {
+	word = strings.ToLower(word) // Normalise input to lowercase.
 	current_node := trie.root
 	for i, ch := range word {
 
@@ -165,8 +167,8 @@ func (trie *BurstTrie) CollectFromTrieNode(current_node *TrieNode, sorted_words 
 		*sorted_words = append(*sorted_words, current_node.bucket...)
 		return
 	}
-	for ch := 'a'; ch <= 'z'; ch++ {
-		if child, exists := current_node.children[ch]; exists {
+	for ch := 0; ch < 256; ch++ {
+		if child, exists := current_node.children[rune(ch)]; exists {
 			trie.CollectFromTrieNode(child, sorted_words) // Recursively collects words from the next chld node one by one.
 		}
 	}
@@ -189,7 +191,7 @@ func BurstSort(words []string) []string {
 }
 
 func main() {
-	words := []string{"varun", "midhunan", "narain", "aashiq", "aadith", "bash", "adithya", "go", "batter", "anurup"}
+	words := []string{"varun", "Midhunan2", "midhunan1", "narain", "aashiq", "aadith", "bash", "adithya", "#go", "batter", "anurup"}
 
 	fmt.Println("Unsorted List:", words)
 	sorted_words := BurstSort(words)
