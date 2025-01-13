@@ -133,6 +133,12 @@ func (current_node *TrieNode) Burst() {
 // Function that handles the Insertion Phase.
 func (trie *BurstTrie) Insert(word string) {
 	word = strings.ToLower(word) // Normalise input to lowercase.
+
+	// Skips empty strings as they are invalid for sorting.
+	if word == "" {
+		return
+	}
+
 	current_node := trie.root
 	for i, ch := range word {
 
@@ -191,7 +197,7 @@ func BurstSort(words []string) []string {
 }
 
 func main() {
-	words := []string{"varun", "Midhunan2", "midhunan1", "narain", "aashiq", "aadith", "bash", "adithya", "#go", "batter", "anurup"}
+	words := []string{"varun", "Midhunan2", "midhunan1", "narain", "", "aashiq", "aadith", "bash", "adithya", "#go", "batter", "anurup"}
 
 	fmt.Println("Unsorted List:", words)
 	sorted_words := BurstSort(words)
