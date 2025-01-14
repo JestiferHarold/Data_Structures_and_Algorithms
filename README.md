@@ -106,6 +106,7 @@ We’re excited to have you contribute! Whether it’s adding a new algorithm, f
 | [Akshay KS](https://github.com/akshayks13)                       | Python (.py)        |
 | [Jayadev D](https://github.com/FLASH2332)                        | Go (.go)            |
 | [Nandgopal R Nair](https://github.com/Nandgopal-R)               | Go (.go)            |
+| [Mithileshwaran S](https://github.com/MithileshwaranS)           | Java (.java)        |
 | [Keerthivasan S V](https://github.com/Keerthivasan-Venkitajalam) | Markdown (.md)      |
 | [Tharun D](https://github.com/tharun-0106)                       | Documentation (.md) |
 | [BIJJUDAMA](https://github.com/BIJJUDAMA)                        | Miscellaneous       |
