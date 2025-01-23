@@ -1,14 +1,14 @@
 public class MergeSort {
     public static void mergeSort(int[] arr) {
-        if (arr.length > 1) {
-            int mid = arr.length / 2;
+        if (arr != null && arr.length > 1) {
+            long mid = (long) arr.length / 2;
 
-            int[] left = new int[mid];
-            int[] right = new int[arr.length - mid];
+            int[] left = new int[(int) mid];
+            int[] right = new int[arr.length - (int) mid];
 
             // Dividing the array into two
-            System.arraycopy(arr, 0, left, 0, mid);
-            System.arraycopy(arr, mid, right, 0, arr.length - mid);
+            System.arraycopy(arr, 0, left, 0, (int) mid);
+            System.arraycopy(arr, (int) mid, right, 0, arr.length - (int) mid);
 
             // Recursively calling mergeSort on both half's of the array
             mergeSort(left);
