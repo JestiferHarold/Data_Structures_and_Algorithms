@@ -5,7 +5,7 @@ public class ParallelMergeSort {
 
     // Threshold to switch to normal merge sort
     // change this value according to the size of the array to get the best performance
-    private static final int THRESHOLD = 5;
+    private static final int THRESHOLD = 4096;
 
     public static void parallelMergeSort(int[] arr) {
         SortTask sortTask = new SortTask(arr);
