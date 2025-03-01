@@ -103,7 +103,7 @@ We’re excited to have you contribute! Whether it’s adding a new algorithm, f
 | [Ashwin V A](https://github.com/WinterSun23)                     | C++ (.cpp)          |
 | [Adithya Menon R](https://github.com/adithya-menon-r)            | C++ (.cpp) & Go (.go)          |
 | [Leela](https://github.com/Leela0o5)                             | Python (.py)        |
-| [Akshay KS](https://github.com/akshayks13)                       | Python (.py)        |
+| [Akshay KS](https://github.com/akshayks13)                       | Python (.py)  &  C++ (.cpp) |
 | [Jayadev D](https://github.com/FLASH2332)                        | Go (.go)            |
 | [Nandgopal R Nair](https://github.com/Nandgopal-R)               | Go (.go)            |
 | [Mithileshwaran S](https://github.com/MithileshwaranS)           | Java (.java)        |
