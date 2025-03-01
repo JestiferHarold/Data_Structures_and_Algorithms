@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void BubbleSort(vector<int>& arr){
+void bubbleSort(vector<int>& arr){
     int n = arr.size();
     for(int i=0;i<n;i++){
         bool swapped = false;
@@ -23,7 +23,7 @@ void BubbleSort(vector<int>& arr){
 
 int main(){
     vector<int> arr = {2,4,3,5,2,1,5,6};
-    BubbleSort(arr);
+    bubbleSort(arr);
     for(int num : arr){
         cout << num << " ";
     }
