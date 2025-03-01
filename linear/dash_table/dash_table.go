@@ -8,7 +8,7 @@ import (
 
 type Slot struct {
 	key   string
-	value interface{}
+	value any
 	used  bool
 }
 
@@ -16,18 +16,18 @@ type Bucket struct {
 	slots []*Slot // Each bucket has 14 slots
 }
 
-// Hash table of constant size 
+// Hash table of constant size
 type Segment struct {
-	buckets    []*Bucket  // 56 regular buckets
-	stash      []*Bucket  // 4 stash buckets
-	maxBuckets int       
-	maxStash   int       
+	buckets    []*Bucket // 56 regular buckets
+	stash      []*Bucket // 4 stash buckets
+	maxBuckets int
+	maxStash   int
 }
 
 // The main dash table structure
 type DashTable struct {
 	segments []*Segment
-	segSize  int // Number of segments 
+	segSize  int // Number of segments
 }
 
 // initializes a DashTable with the given no. of segments.
@@ -75,7 +75,7 @@ func (dt *DashTable) bucketHash(key string, bucketCount int) int {
 }
 
 // For inserting a new key-value pair
-func (dt *DashTable) Put(key string, value interface{}) error {
+func (dt *DashTable) Put(key string, value any) error {
 	segIndex := dt.hash(key)
 	segment := dt.segments[segIndex]
 	bucketIndex := dt.bucketHash(key, segment.maxBuckets)
@@ -109,7 +109,7 @@ func (dt *DashTable) Put(key string, value interface{}) error {
 }
 
 // for inserting a key-value pair into a bucket
-func (dt *DashTable) insertIntoBucket(bucket *Bucket, key string, value interface{}) bool {
+func (dt *DashTable) insertIntoBucket(bucket *Bucket, key string, value any) bool {
 	for i, slot := range bucket.slots {
 		if slot == nil || !slot.used {
 			bucket.slots[i] = &Slot{key: key, value: value, used: true}
@@ -124,7 +124,7 @@ func (dt *DashTable) insertIntoBucket(bucket *Bucket, key string, value interfac
 }
 
 // To get the value of the given key
-func (dt *DashTable) Get(key string) (interface{}, error) {
+func (dt *DashTable) Get(key string) (any, error) {
 	segIndex := dt.hash(key)
 	segment := dt.segments[segIndex]
 	bucketIndex := dt.bucketHash(key, segment.maxBuckets)
