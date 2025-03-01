@@ -34,18 +34,18 @@ void merge(vector<int>& arr , int l , int r , int m){
 
 }
 
-void mergesort(vector<int>& arr , int l , int r){
+void mergeSort(vector<int>& arr , int l , int r){
     if (l<r){
         int mid = (l+r)/2;
-        mergesort(arr,l,mid);
-        mergesort(arr,mid+1,r);
+        mergeSort(arr,l,mid);
+        mergeSort(arr,mid+1,r);
         merge(arr,l,r,mid);
     }
 }
 
 int main(){
     vector<int> arr = {2,4,4,2,24,21,34,44,1,3,3,45,6};
-    mergesort(arr,0,arr.size()-1);
+    mergeSort(arr,0,arr.size()-1);
     for(int num : arr){
         cout << num << " ";
     }
