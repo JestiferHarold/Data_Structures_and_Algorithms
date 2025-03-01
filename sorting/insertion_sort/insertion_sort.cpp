@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void InsertionSort(vector<int>& arr){
+void insertionSort(vector<int>& arr){
     int n = arr.size();
     for(int i=1;i<n;i++){
         int key = arr[i];
@@ -19,7 +19,7 @@ void InsertionSort(vector<int>& arr){
 
 int main(){
     vector<int> arr = {6,4,3,2,5,6,43,67,3,5,5};
-    InsertionSort(arr);
+    insertionSort(arr);
     for(int num : arr){
         cout << num << " ";
     }
