@@ -351,7 +351,7 @@ func (tree *RBTree) inOrderTraversal(node *RBNode) []int {
 	}
 	lst[i] = node.val
 	i++
-	for j := 0; j < len(right); j++ {
+	for j := range right {
 		lst[i+j] = right[j]
 	}
 	return lst
