@@ -1,13 +1,13 @@
 // Kosaraju's algorithm is used to find strongly connected components. It is applicable only for directed graphs
 /*In a component if every pair of vertex is reachable to each other it is called strongly connected components.
-   Kosaraju's Algorithm:
-   1.Sort all edges of the graph according to its stopping time.Implement DFS from node 0 and and 
-     while backtracking in the DFS, store the nodes in a stack
-   2.Now, reverse the edges of the graph to identify strongly connected components.For this create another adjacency
-     list and store the information the graph in reversed manner
-   3.Now, implement DFS again from the node which is on the top of the stack and continue until stack becomes empty.
-     Count the number of DFS calls which gives the number of strongly connected components.
-   4.To get SCCs , store nodes in array during each DFS call.
+  Kosaraju's Algorithm:
+  1.Sort all edges of the graph according to its stopping time.Implement DFS from node 0 and and
+    while backtracking in the DFS, store the nodes in a stack
+  2.Now, reverse the edges of the graph to identify strongly connected components.For this create another adjacency
+    list and store the information the graph in reversed manner
+  3.Now, implement DFS again from the node which is on the top of the stack and continue until stack becomes empty.
+    Count the number of DFS calls which gives the number of strongly connected components.
+  4.To get SCCs , store nodes in array during each DFS call.
 */
 package main
 
@@ -91,9 +91,9 @@ func main() {
 	// User input for vertices and edges
 	fmt.Print("Enter the number of vertices: ")
 	fmt.Scan(&V)
-	if V<=0{
-	fmt.Println("Graph should have atleast one vertex")
-	return
+	if V <= 0 {
+		fmt.Println("Graph should have atleast one vertex")
+		return
 	}
 	fmt.Print("Enter the number of edges: ")
 	fmt.Scan(&E)
@@ -109,10 +109,10 @@ func main() {
 		var u, v int
 		fmt.Printf("Edge %d: ", i+1)
 		fmt.Scan(&u, &v)
-		if u<0 || u>=V || v<0 ||v>=V{
-		fmt.Println("Invalid Edge")
-		i--
-		continue
+		if u < 0 || u >= V || v < 0 || v >= V {
+			fmt.Println("Invalid Edge")
+			i--
+			continue
 		}
 		graph.adj[u] = append(graph.adj[u], v)
 	}
