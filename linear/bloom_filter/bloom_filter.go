@@ -1,7 +1,7 @@
 /*
 Bloom Filter:
 A Bloom Filter is a probabilistic data structure that is used to test whether an element is in the bloom filter.
-It can give false positives but never false negatives. So, it may say an item is present when it is not, 
+It can give false positives but never false negatives. So, it may say an item is present when it is not,
 but if it says an item is absent, then it is definitely not there.
 
 How it works:
@@ -13,10 +13,14 @@ How it works:
 
 Usage:
 - Used in caching mechanisms like Google BigTable and databases to reduce expensive disk lookups.
-  Instead of checking if a data is in the database, which takes more resouces and time, 
-  the bloom filter is used to check if the data is there or not. 
+  Instead of checking if a data is in the database, which takes more resouces and time,
+  the bloom filter is used to check if the data is there or not.
 - Used to check if a website is malicious or not.
-  The bloom filter checks if the hash of that website address is present in it or not. 
+  The bloom filter checks if the hash of that website address is present in it or not.
+
+References:
+- https://medium.com/@meeusdylan/creating-a-bloom-filter-with-go-7d4e8d944cfa
+- https://en.wikipedia.org/wiki/Bloom_filter
 */
 
 package main
@@ -28,18 +32,18 @@ import (
 )
 
 type bloomFilter struct {
-	filter       []bool  // Boolean array representing the Bloom Filter
-	filterLength int     // Size of the Bloom Filter
-	noOfHashes   int     // Number of hash functions to use
-	noOfElements int     // Number of elements currently added in the Bloom Filter
+	filter       []bool // Boolean array representing the Bloom Filter
+	filterLength int    // Size of the Bloom Filter
+	noOfHashes   int    // Number of hash functions to use
+	noOfElements int    // Number of elements currently added in the Bloom Filter
 }
 
 // Creates a new Bloom Filter with given filter size and estimated number of elements.
 func newBloomFilter(filterLength int, totalElements int) *bloomFilter {
 	return &bloomFilter{
-		filter: make([]bool, filterLength), 
-		filterLength: filterLength, 
-		noOfHashes: calculateNoOfHashes(filterLength, totalElements),
+		filter:       make([]bool, filterLength),
+		filterLength: filterLength,
+		noOfHashes:   calculateNoOfHashes(filterLength, totalElements),
 		noOfElements: 0,
 	}
 }
@@ -54,7 +58,7 @@ func calculateNoOfHashes(filterLength int, noOfElements int) int {
 	return int(math.Round((float64(filterLength) / (float64(noOfElements)) * math.Ln2)))
 }
 
-// Adds an input string to the Bloom Filter by setting multiple bits to true based on 
+// Adds an input string to the Bloom Filter by setting multiple bits to true based on
 // the indices returned by double hashing.
 func (bf *bloomFilter) addInput(input string) {
 	hashVals := doubleHashing(input, bf.filterLength, bf.noOfHashes)
@@ -79,18 +83,18 @@ func (bf *bloomFilter) checkInput(input string) bool {
 
 // Uses the FNV-1a hash function(uses less memory and faster) to generate a 32-bit hash value from an input string.
 func hashFunc(input string) uint32 {
-	h := fnv.New32a()  // Creates new instance of the hash function.
-	h.Write([]byte(input))  // Converts the string to bytes and each byte is processed by the hash function
-	return h.Sum32()  // Returns the 32-bit hash value
+	h := fnv.New32a()      // Creates new instance of the hash function.
+	h.Write([]byte(input)) // Converts the string to bytes and each byte is processed by the hash function
+	return h.Sum32()       // Returns the 32-bit hash value
 }
 
 // Double hashing done to generate multiple hash values and prevent collision
 func doubleHashing(input string, filterLength int, noOfHashes int) []int {
 	hashVals := make([]int, noOfHashes)
 	hash1 := int(hashFunc(input) % uint32(filterLength))
-	hash2 := int((hashFunc(input + "golangrocks") % uint32(filterLength)))  // Added a string "golangrocks" to differentiate hash
+	hash2 := int((hashFunc(input+"golangrocks") % uint32(filterLength))) // Added a string "golangrocks" to differentiate hash
 	for i := 0; i < noOfHashes; i++ {
-		hashVals[i] = (hash1 + i * hash2) % filterLength  // double hashing formula
+		hashVals[i] = (hash1 + i*hash2) % filterLength // double hashing formula
 	}
 	return hashVals
 }
@@ -101,18 +105,20 @@ func falsePositiveProbability(filterLength int, noOfElements int, noOfHashes int
 	if noOfElements == 0 {
 		return 0
 	}
-	power := -float64(noOfHashes * noOfElements) / float64(filterLength)
+	power := -float64(noOfHashes*noOfElements) / float64(filterLength)
 	return math.Pow(1-math.Exp(power), float64(noOfHashes))
 }
 
 func main() {
+	// The inputs are not validated as
+	// the focus is on the Bloom Filter implementation.
 	var filterLength, totalElements int
 	fmt.Print("Enter Bloom Filter length: ")
 	fmt.Scanln(&filterLength)
 	fmt.Print("Enter the no of elements to add (an estimate is fine): ")
 	fmt.Scanln(&totalElements)
 
-	bf := newBloomFilter(filterLength,totalElements)
+	bf := newBloomFilter(filterLength, totalElements)
 
 	for {
 		fmt.Println("\nOptions:")
@@ -137,7 +143,7 @@ func main() {
 			fmt.Print("Enter item to check: ")
 			var input string
 			fmt.Scanln(&input)
-			
+
 			if bf.checkInput(input) {
 				fmt.Println("Item might be in the set (possible true or false positive).")
 			} else {
