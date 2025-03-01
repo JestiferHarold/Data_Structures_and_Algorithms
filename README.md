@@ -113,6 +113,7 @@ We’re excited to have you contribute! Whether it’s adding a new algorithm, f
 | [Ratakonda Bhavitha](https://github.com/ratakondabhavitha)       | Go (.go)                   |
 | [Yash](https://github.com/yendelevium)                           | Go (.go)                   |
 | [Mithileshwaran S](https://github.com/MithileshwaranS)           | Java (.java)               |
+| [Praneeth V](https://github.com/PraneethV-cmd)                   | Rust (.rs)                 |
 | [Keerthivasan S V](https://github.com/Keerthivasan-Venkitajalam) | Markdown (.md)             |
 | [Tharun D](https://github.com/tharun-0106)                       | Documentation (.md)        |
 | [BIJJUDAMA](https://github.com/BIJJUDAMA)                        | Miscellaneous              |
