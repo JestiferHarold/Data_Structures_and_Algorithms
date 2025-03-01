@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void SelectionSort(vector<int>& arr){
+void selectionSort(vector<int>& arr){
     int n = arr.size();
     for(int i=0;i<n;i++){
         int min_idx = i;
@@ -21,7 +21,7 @@ void SelectionSort(vector<int>& arr){
 
 int main(){
     vector<int> arr = {6,4,3,2,5,6,43,67,3,5,5};
-    SelectionSort(arr);
+    selectionSort(arr);
     for(int num : arr){
         cout << num << " ";
     }
