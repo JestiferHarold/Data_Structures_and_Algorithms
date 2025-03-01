@@ -1,4 +1,4 @@
-/* Dash Table -> Array of hashtables(mini) */
+// Dash Table -> Array of hashtables(mini).
 package main
 
 import (
@@ -13,21 +13,21 @@ type Slot struct {
 }
 
 type Bucket struct {
-	slots []*Slot // Each bucket has 14 slots
+	slots []*Slot // Each bucket has 14 slots.
 }
 
-// Hash table of constant size
+// Hash table of constant size.
 type Segment struct {
-	buckets    []*Bucket // 56 regular buckets
-	stash      []*Bucket // 4 stash buckets
+	buckets    []*Bucket // 56 regular buckets.
+	stash      []*Bucket // 4 stash buckets.
 	maxBuckets int
 	maxStash   int
 }
 
-// The main dash table structure
+// The main dash table structure.
 type DashTable struct {
 	segments []*Segment
-	segSize  int // Number of segments
+	segSize  int // Number of segments.
 }
 
 // initializes a DashTable with the given no. of segments.
@@ -56,7 +56,7 @@ func CreateDashTable(segSize int) *DashTable {
 	return &DashTable{segments: segments, segSize: segSize}
 }
 
-// Primary Hash function
+// Primary Hash function.
 func (dt *DashTable) hash(key string) int {
 	hash := 0
 	for _, char := range key {
@@ -65,7 +65,7 @@ func (dt *DashTable) hash(key string) int {
 	return hash
 }
 
-// Bucket hash function to find the bucket in which the key should be inserted into
+// Bucket hash function to find the bucket in which the key should be inserted into.
 func (dt *DashTable) bucketHash(key string, bucketCount int) int {
 	hash := 0
 	for _, char := range key {
@@ -74,7 +74,7 @@ func (dt *DashTable) bucketHash(key string, bucketCount int) int {
 	return hash
 }
 
-// For inserting a new key-value pair
+// For inserting a new key-value pair.
 func (dt *DashTable) Put(key string, value any) error {
 	segIndex := dt.hash(key)
 	segment := dt.segments[segIndex]
@@ -88,14 +88,14 @@ func (dt *DashTable) Put(key string, value any) error {
 		}
 	}
 
-	// Try stash buckets
+	// Try stash buckets.
 	for _, bucket := range segment.stash {
 		if dt.insertIntoBucket(bucket, key, value) {
 			return nil
 		}
 	}
 
-	// Add new stash bucket if needed
+	// Add new stash bucket if needed.
 	if len(segment.stash) < segment.maxStash {
 		newBucket := &Bucket{slots: make([]*Slot, 14)}
 		dt.insertIntoBucket(newBucket, key, value)
@@ -103,19 +103,19 @@ func (dt *DashTable) Put(key string, value any) error {
 		return nil
 	}
 
-	// Split segment if stash is full
+	// Split segment if stash is full.
 	dt.splitSegment(segIndex)
 	return dt.Put(key, value)
 }
 
-// for inserting a key-value pair into a bucket
+// for inserting a key-value pair into a bucket.
 func (dt *DashTable) insertIntoBucket(bucket *Bucket, key string, value any) bool {
 	for i, slot := range bucket.slots {
 		if slot == nil || !slot.used {
 			bucket.slots[i] = &Slot{key: key, value: value, used: true}
 			return true
 		}
-		if slot != nil && slot.used && slot.key == key {
+		if slot.used && slot.key == key {
 			slot.value = value
 			return true
 		}
@@ -123,7 +123,7 @@ func (dt *DashTable) insertIntoBucket(bucket *Bucket, key string, value any) boo
 	return false
 }
 
-// To get the value of the given key
+// To get the value of the given key.
 func (dt *DashTable) Get(key string) (any, error) {
 	segIndex := dt.hash(key)
 	segment := dt.segments[segIndex]
