@@ -4,3 +4,4 @@
 # Rust
 debug/
 target/
+.vscode
